@@ -1,5 +1,6 @@
 package com.example.lab10.repositories;
 
+import com.example.lab10.entities.Student;
 import com.example.lab10.entities.Teacher;
 import org.springframework.stereotype.Repository;
 
@@ -9,8 +10,5 @@ import java.util.List;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
-
-    List<Teacher> searchAllByName(String name);
-    List<Teacher> searchAllBySurname(String name);
-    List<Teacher> searchAllByNameAndSurname(String name, String surname);
+    List<Teacher> searchAllByNameContainingAndSurnameContainingOrderBySurname (String name, String Surname);
 }

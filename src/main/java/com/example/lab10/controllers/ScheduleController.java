@@ -1,33 +1,59 @@
 package com.example.lab10.controllers;
 
 import com.example.lab10.entities.Schedule;
+import com.example.lab10.services.DepartmentService;
 import com.example.lab10.services.ScheduleService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/schedule")
+@RequestMapping("/schedules")
 @AllArgsConstructor
 public class ScheduleController {
     private ScheduleService service;
 
 
+    @GetMapping("/by/group")
+    public Page<Schedule> searchByGroup(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                        @RequestParam(required = false, defaultValue = "10") Integer elementsPerPage,
+                                        @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
+                                        @RequestParam(required = false, defaultValue = "name") ScheduleService.ScheduleFields sortField
+            , @RequestParam(name = "group", required = false) Integer groupId) {
+        return service.getAllByGroup(groupId, page, elementsPerPage, sortDirection, sortField);
+    }
+
+    @GetMapping("/by/teacher")
+    public Page<Schedule> searchByTeacher(@RequestParam(name = "teacher", required = false) Integer teacherId,
+                                          @RequestParam(required = false, defaultValue = "0") Integer page,
+                                          @RequestParam(required = false, defaultValue = "10") Integer elementsPerPage,
+                                          @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
+                                          @RequestParam(required = false, defaultValue = "name") ScheduleService.ScheduleFields sortField
+    ) {
+        return service.getAllByTeacher(teacherId, page, elementsPerPage, sortDirection, sortField);
+    }
+
+    @GetMapping("/by/discipline")
+    public Page<Schedule> searchByDiscipline(@RequestParam(name = "group", required = false) Integer groupId,
+                                        @RequestParam(required = false, defaultValue = "0") Integer page,
+                                        @RequestParam(required = false, defaultValue = "10") Integer elementsPerPage,
+                                        @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
+                                        @RequestParam(required = false, defaultValue = "name") ScheduleService.ScheduleFields sortField
+    ) {
+        return service.getAllByDiscipline(groupId,page,elementsPerPage,sortDirection,sortField);
+    }
+
     @GetMapping()
-    public List<Schedule> getAll(@RequestParam(name = "group", required = false) Integer groupId,
-                                 @RequestParam(name = "teacher", required = false) Integer teacherId,
-                                 @RequestParam(name = "discipline", required = false) Integer disciplineId) {
-        if (groupId != null) {
-            return service.getAllByGroup(groupId);
-        }
-        if (teacherId != null) {
-            return service.getAllByTeacher(teacherId);
-        }
-        if (disciplineId != null) {
-            return service.getAllByDiscipline(disciplineId);
-        }
-        return service.getAll();
+    public Page<Schedule> getAll(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                 @RequestParam(required = false, defaultValue = "10") Integer elementsPerPage,
+                                 @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
+                                 @RequestParam(required = false, defaultValue = "name") ScheduleService.ScheduleFields sortField
+    ) {
+
+        return service.getAll(page, elementsPerPage, sortDirection, sortField);
     }
 
     @GetMapping("/search")
@@ -35,6 +61,7 @@ public class ScheduleController {
 
         return service.searchByName(name);
     }
+
     @GetMapping("/{id}")
     public Schedule getOne(@PathVariable Integer id) {
         return service.getOneById(id);

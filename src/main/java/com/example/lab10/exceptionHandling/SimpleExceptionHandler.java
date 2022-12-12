@@ -21,7 +21,7 @@ public ResponseEntity<Object> notFoundException(EntityNotFoundException ex, WebR
     return new ResponseEntity<Object>(new ErrorResponseBody(ex.getMessage(), request.toString().split(" ")[1].split(";")[0].substring(4)), new HttpHeaders(), HttpStatus.BAD_REQUEST);
 }
 @ExceptionHandler(ConstraintViolationException.class)
-public ResponseEntity<Object> validation(ConstraintViolationException ex, WebRequest request){i
+public ResponseEntity<Object> validation(ConstraintViolationException ex, WebRequest request){
         return new ResponseEntity<Object>(
                 new ConstraintViolationsResponse(
                         ex.getConstraintViolations().stream()

@@ -1,9 +1,15 @@
 package com.example.lab10.services;
+import com.example.lab10.entities.Student;
 import com.example.lab10.entities.Teacher;
 import com.example.lab10.repositories.TeacherRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +20,18 @@ import java.util.Optional;
 public class TeacherService {
     private TeacherRepository repository;
 
-    public List<Teacher> getAll() {
-        return repository.findAll();
+    public Page<Teacher> getAll(@Min(0) Integer page, @Min(1) Integer elementsPerPage,
+                                Sort.Direction sortDirection, TeacherFields sortField) {
+        Pageable pageable = PageRequest.of(page, elementsPerPage,
+                Sort.by(sortDirection, sortField.name()));
+        return repository.findAll(pageable);
     }
-
+    public enum TeacherFields{
+        name,email,phone,surname
+    }
+    public List<Teacher> searchByNameAndSurname(@NotNull String name, @NotNull String surname){
+        return repository.searchAllByNameContainingAndSurnameContainingOrderBySurname(name, surname);
+    }
     public Teacher getOneById(@Min(value = 1,message = "invalid id") Integer id) {
         Optional<Teacher> res = repository.findById(id);
         return res.orElse(null);
