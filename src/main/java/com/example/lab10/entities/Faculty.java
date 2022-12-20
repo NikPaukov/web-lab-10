@@ -25,8 +25,8 @@ public class Faculty  {
     @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d ']+", message = "name should contain only english/ukrainian letters")
     private String name;
 
-    @NotBlank(message = "short name is required")
-    @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d '']+", message = "short name should contain only english/ukrainian letters")
+    @NotBlank(message = "shortName is required")
+    @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d '']+", message = "shortName should contain only english/ukrainian letters")
     @Column(name = "short_name")
     private String shortName;
 

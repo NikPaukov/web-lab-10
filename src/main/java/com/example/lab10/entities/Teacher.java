@@ -21,18 +21,18 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "необхідно")
+    @NotBlank(message = "name is required")
     @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d ']+", message = "name should contain only english/ukrainian letters")
     private String name;
 
-    @NotBlank(message = "необхідно")
+    @NotBlank(message = "surname is required")
     @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d ']+", message = "surname should contain only english/ukrainian letters")
     private String surname;
 
-    @Email(message = "invalid email")
+    @Email(message = "email is invalid")
     private String email;
 
-    @Pattern(regexp = "(^$)|[+\\d{13}]", message = "invalid number")
+    @Pattern(regexp = "(^$)|[+\\d{13}]", message = "number is invalid")
     private String phone;
 
     @Override

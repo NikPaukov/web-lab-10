@@ -22,7 +22,7 @@ public class Discipline  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "необхідна")
+    @NotBlank(message = "name is required")
     @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d ']+", message = "name should contain only english/ukrainian letters")
     private String name;
 

@@ -1,7 +1,6 @@
 package com.example.lab10.services;
 
 import com.example.lab10.entities.*;
-import com.example.lab10.exceptionHandling.EntityNotFoundException;
 import com.example.lab10.repositories.ScheduleRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;

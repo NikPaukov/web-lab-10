@@ -25,12 +25,12 @@ public class Group  {
     @NotNull(message = "department is required")
     private Department department;
 
-    @NotBlank(message ="необхідна")
+    @NotBlank(message ="name is required")
     @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d '']+", message = "name should contain only english/ukrainian letters")
     private String name;
 
-    @Min(value = 1, message = "should be from 1 to 6")
-    @Max(value = 6, message = "should be from 1 to 6")
+    @Min(value = 1, message = "course should be from 1 to 6")
+    @Max(value = 6, message = "course should be from 1 to 6")
     private Integer course;
 
     @Override

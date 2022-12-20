@@ -38,13 +38,13 @@ public class Schedule {
 
 
     @NotNull(message = "lesson is required")
-    @Min(value = 1, message = "should be from 1 to 6")
-    @Max(value = 6, message = "should be from 1 to 6")
+    @Min(value = 1, message = "lesson should be from 1 to 6")
+    @Max(value = 6, message = "lesson should be from 1 to 6")
     private Integer lesson;
 
-    @NotNull(message = "lesson is required")
-    @Min(value = 1, message = "should be from 1 to 7")
-    @Max(value = 7, message = "should be from 1 to 7")
+    @NotNull(message = "dayOfWeek is required")
+    @Min(value = 1, message = "dayOfWeek should be from 1 to 7")
+    @Max(value = 7, message = "dayOfWeek should be from 1 to 7")
     private Integer dayOfWeek;
 
 
