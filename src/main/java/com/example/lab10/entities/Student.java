@@ -37,7 +37,7 @@ public class Student {
     private String surname;
     @Email(message = "email is invalid")
     private String email;
-    @Pattern(regexp = "(^$)|[+\\d{13}]+", message = "number is invalid")
+
     private String phone;
 
 
