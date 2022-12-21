@@ -30,7 +30,7 @@ public class TeacherService {
         name,email,phone,surname
     }
     public List<Teacher> searchByNameAndSurname(@NotNull String name, @NotNull String surname){
-        return repository.searchAllByNameContainingAndSurnameContainingOrderBySurname(name, surname);
+        return repository.searchAllByNameContainingOrSurnameContainingOrderBySurname(name, surname);
     }
     public Teacher getOneById(@Min(value = 1,message = "invalid id") Integer id) {
         Optional<Teacher> res = repository.findById(id);

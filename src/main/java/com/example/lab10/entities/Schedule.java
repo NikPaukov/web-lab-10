@@ -42,6 +42,7 @@ public class Schedule {
     @Max(value = 6, message = "lesson should be from 1 to 6")
     private Integer lesson;
 
+    @Column(name="dayofweek")
     @NotNull(message = "dayOfWeek is required")
     @Min(value = 1, message = "dayOfWeek should be from 1 to 7")
     @Max(value = 7, message = "dayOfWeek should be from 1 to 7")
