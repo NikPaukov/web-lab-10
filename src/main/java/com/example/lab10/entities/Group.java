@@ -7,14 +7,14 @@ import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
-@Table(name="groups")
+@Table(name = "groups")
 @Entity
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Group  {
+public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Group  {
     @NotNull(message = "department is required")
     private Department department;
 
-    @NotBlank(message ="name is required")
+    @NotBlank(message = "name is required")
     @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d '']+", message = "name should contain only english/ukrainian letters")
     private String name;
 

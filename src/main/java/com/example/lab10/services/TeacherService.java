@@ -1,5 +1,5 @@
 package com.example.lab10.services;
-import com.example.lab10.entities.Student;
+
 import com.example.lab10.entities.Teacher;
 import com.example.lab10.repositories.TeacherRepository;
 import jakarta.validation.Valid;
@@ -26,28 +26,31 @@ public class TeacherService {
                 Sort.by(sortDirection, sortField.name()));
         return repository.findAll(pageable);
     }
-    public enum TeacherFields{
-        name,email,phone,surname
+
+    public enum TeacherFields {
+        name, email, phone, surname
     }
-    public List<Teacher> searchByNameAndSurname(@NotNull String name, @NotNull String surname){
+
+    public List<Teacher> searchByNameAndSurname(@NotNull String name, @NotNull String surname) {
         return repository.searchAllByNameContainingOrSurnameContainingOrderBySurname(name, surname);
     }
-    public Teacher getOneById(@Min(value = 1,message = "invalid id") Integer id) {
+
+    public Teacher getOneById(@Min(value = 1, message = "invalid id") Integer id) {
         Optional<Teacher> res = repository.findById(id);
         return res.orElse(null);
     }
 
     public Teacher addOne(@Valid Teacher input) {
-        return  repository.save(input);
+        return repository.save(input);
     }
 
-    public void deleteOne(@Min(value = 1,message = "invalid id") Integer id) {
+    public void deleteOne(@Min(value = 1, message = "invalid id") Integer id) {
         repository.deleteById(id);
     }
 
     public void updateOne(@Valid Teacher entity) {
         Optional<Teacher> entityFromDB = repository.findById(entity.getId());
-        if(entityFromDB.isPresent()){
+        if (entityFromDB.isPresent()) {
             repository.save(entity);
         }
     }

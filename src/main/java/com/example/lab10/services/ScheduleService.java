@@ -1,6 +1,9 @@
 package com.example.lab10.services;
 
-import com.example.lab10.entities.*;
+import com.example.lab10.entities.Discipline;
+import com.example.lab10.entities.Group;
+import com.example.lab10.entities.Schedule;
+import com.example.lab10.entities.Teacher;
 import com.example.lab10.repositories.ScheduleRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -29,9 +32,17 @@ public class ScheduleService {
                 Sort.by(sortOrder, sortField.name()));
         return repository.findAll(pageable);
     }
+
+    public enum ScheduleFields {
+        name,
+        lesson,
+        dayOfWeek,
+        classroom
+    }
+
     public Page<Schedule> getAllByDiscipline(@Min(value = 1, message = "invalid id") Integer disciplineId,
-                                        @Min(0) Integer page, @Min(1) Integer elementsPerPage,
-                                        Sort.Direction sortOrder, ScheduleFields sortField) {
+                                             @Min(0) Integer page, @Min(1) Integer elementsPerPage,
+                                             Sort.Direction sortOrder, ScheduleFields sortField) {
         Pageable pageable = PageRequest.of(page, elementsPerPage,
                 Sort.by(sortOrder, sortField.name()));
         Discipline discipline = disciplineService.getOneById(disciplineId);
@@ -52,8 +63,8 @@ public class ScheduleService {
 
 
     public Page<Schedule> getAllByTeacher(@Min(value = 1, message = "invalid id") Integer teacherId,
-                                        @Min(0) Integer page, @Min(1) Integer elementsPerPage,
-                                        Sort.Direction sortOrder, ScheduleFields sortField) {
+                                          @Min(0) Integer page, @Min(1) Integer elementsPerPage,
+                                          Sort.Direction sortOrder, ScheduleFields sortField) {
         Pageable pageable = PageRequest.of(page, elementsPerPage,
                 Sort.by(sortOrder, sortField.name()));
         Teacher teacher = teacherService.getOneById(teacherId);
@@ -61,15 +72,6 @@ public class ScheduleService {
         return repository.findAllByTeacher(teacher, pageable);
     }
 
-
-
-
-    public enum ScheduleFields {
-        name,
-        lesson,
-        dayOfWeek,
-        classroom
-    }
 
     public List<Schedule> searchByName(@NotNull String name) {
         return repository.searchAllByNameContainingOrderByName(name);
@@ -79,7 +81,6 @@ public class ScheduleService {
         Optional<Schedule> res = repository.findById(id);
         return res.orElse(null);
     }
-
 
 
     public Schedule addOne(@Valid Schedule input) {

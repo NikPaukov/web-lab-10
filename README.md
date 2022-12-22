@@ -53,6 +53,21 @@ lesson int not null check (lesson > 0 and lesson <7),
 classroom varchar(255)
 );
 
+create table faqs
+(
+id serial,
+question varchar not null,
+answer varchar not null
+);
+
+create unique index faqs_id_uindex
+on faqs (id);
+
+alter table faqs
+add constraint faqs_pk
+primary key (id);
+
+
 insert into faculties(name, short_name) values
 ('Факультет Інформаційної Обчислювальної Техніки', 'ФІОТ'),
 ('Інститут Аерокосмічних Технологій', 'ІАТ'),

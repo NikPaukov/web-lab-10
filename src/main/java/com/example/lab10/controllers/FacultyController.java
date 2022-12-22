@@ -1,8 +1,6 @@
 package com.example.lab10.controllers;
 
-import com.example.lab10.entities.Discipline;
 import com.example.lab10.entities.Faculty;
-import com.example.lab10.services.DisciplineService;
 import com.example.lab10.services.FacultyService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,16 +14,18 @@ import java.util.List;
 @AllArgsConstructor
 public class FacultyController {
     private FacultyService service;
+
     @GetMapping()
     public Page<Faculty> getAll(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                   @RequestParam(required = false, defaultValue = "10") Integer elementsPerPage,
-                                   @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
-                                   @RequestParam(required = false, defaultValue = "name") FacultyService.FacultyFields sortField
+                                @RequestParam(required = false, defaultValue = "10") Integer elementsPerPage,
+                                @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
+                                @RequestParam(required = false, defaultValue = "name") FacultyService.FacultyFields sortField
     ) {
-        return service.getAll(page, elementsPerPage,sortDirection, sortField);
+        return service.getAll(page, elementsPerPage, sortDirection, sortField);
     }
+
     @GetMapping("/search/name")
-    public List<Faculty> search(@RequestParam String name){
+    public List<Faculty> search(@RequestParam String name) {
         return service.searchByName(name);
     }
 
@@ -43,8 +43,9 @@ public class FacultyController {
     void updateOne(@RequestBody Faculty entity) {
         service.updateOne(entity);
     }
+
     @DeleteMapping("/{id}")
-    void deleteOne(@PathVariable Integer id){
+    void deleteOne(@PathVariable Integer id) {
         service.deleteOne(id);
     }
 }

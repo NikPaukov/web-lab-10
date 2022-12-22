@@ -1,7 +1,6 @@
 package com.example.lab10.controllers;
 
 import com.example.lab10.entities.Schedule;
-import com.example.lab10.services.DepartmentService;
 import com.example.lab10.services.ScheduleService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -38,12 +37,12 @@ public class ScheduleController {
 
     @GetMapping("/by/discipline")
     public Page<Schedule> searchByDiscipline(@RequestParam(name = "group", required = false) Integer groupId,
-                                        @RequestParam(required = false, defaultValue = "0") Integer page,
-                                        @RequestParam(required = false, defaultValue = "10") Integer elementsPerPage,
-                                        @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
-                                        @RequestParam(required = false, defaultValue = "name") ScheduleService.ScheduleFields sortField
+                                             @RequestParam(required = false, defaultValue = "0") Integer page,
+                                             @RequestParam(required = false, defaultValue = "10") Integer elementsPerPage,
+                                             @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
+                                             @RequestParam(required = false, defaultValue = "name") ScheduleService.ScheduleFields sortField
     ) {
-        return service.getAllByDiscipline(groupId,page,elementsPerPage,sortDirection,sortField);
+        return service.getAllByDiscipline(groupId, page, elementsPerPage, sortDirection, sortField);
     }
 
     @GetMapping()

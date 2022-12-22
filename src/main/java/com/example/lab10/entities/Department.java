@@ -31,9 +31,6 @@ public class Department {
     private String name;
 
 
-
-
-
     @Column(name = "short_name")
     @NotNull(message = "shortName is required")
     @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d ']+", message = "shortName should contain only english/ukrainian letters")

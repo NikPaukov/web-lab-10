@@ -22,37 +22,39 @@ import java.util.Optional;
 public class DepartmentService {
     private DepartmentRepository repository;
 
-    public Page<Department> getAll(@Min(0) Integer page,@Min(1) Integer elementsPerPage,
+    public Page<Department> getAll(@Min(0) Integer page, @Min(1) Integer elementsPerPage,
                                    Sort.Direction sortOrder, DepartmentFields sortField) {
-          Pageable pageable = PageRequest.of(page, elementsPerPage,
+        Pageable pageable = PageRequest.of(page, elementsPerPage,
                 Sort.by(sortOrder, sortField.name()));
         return repository.findAll(pageable);
     }
-    public enum DepartmentFields{
+
+    public enum DepartmentFields {
         name,
         shortName
     }
-    public List<Department> searchByName(@NotNull String name){
+
+    public List<Department> searchByName(@NotNull String name) {
         return repository.searchAllByNameContainingOrderByName(name);
     }
 
 
-    public Department getOneById(@Min(value = 1,message = "invalid id")Integer id) {
+    public Department getOneById(@Min(value = 1, message = "invalid id") Integer id) {
         Optional<Department> res = repository.findById(id);
         return res.orElse(null);
     }
 
     public Department addOne(@Valid Department input) {
-         return repository.save(input);
+        return repository.save(input);
     }
 
-    public void deleteOne(@Min(value = 1,message = "invalid id")Integer id) {
+    public void deleteOne(@Min(value = 1, message = "invalid id") Integer id) {
         repository.deleteById(id);
     }
 
     public void updateOne(@Valid Department entity) {
         Optional<Department> entityFromDB = repository.findById(entity.getId());
-        if(entityFromDB.isPresent()){
+        if (entityFromDB.isPresent()) {
             repository.save(entity);
         }
     }

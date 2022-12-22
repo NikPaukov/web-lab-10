@@ -9,14 +9,14 @@ import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
-@Table(name="disciplines")
+@Table(name = "disciplines")
 @Entity
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Discipline  {
+public class Discipline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

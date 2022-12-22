@@ -1,5 +1,5 @@
 package com.example.lab10.services;
-import com.example.lab10.entities.Department;
+
 import com.example.lab10.entities.Discipline;
 import com.example.lab10.repositories.DisciplineRepository;
 import jakarta.validation.Valid;
@@ -28,10 +28,12 @@ public class DisciplineService {
                 Sort.by(sortDirection, sortField.name()));
         return repository.findAll(pageable);
     }
-    public enum DisciplineFields{
+
+    public enum DisciplineFields {
         name
     }
-    public List<Discipline> searchByName(@NotNull String name){
+
+    public List<Discipline> searchByName(@NotNull String name) {
         return repository.searchAllByNameContainingOrderByName(name);
     }
 
@@ -40,22 +42,22 @@ public class DisciplineService {
         return repository.findAll();
     }
 
-    public Discipline getOneById(@Min(value = 1,message = "invalid id") Integer id) {
+    public Discipline getOneById(@Min(value = 1, message = "invalid id") Integer id) {
         Optional<Discipline> res = repository.findById(id);
         return res.orElse(null);
     }
 
     public Discipline addOne(@Valid Discipline input) {
-         return repository.save(input);
+        return repository.save(input);
     }
 
-    public void deleteOne(@Min(value = 1,message = "invalid id") Integer id) {
+    public void deleteOne(@Min(value = 1, message = "invalid id") Integer id) {
         repository.deleteById(id);
     }
 
     public void updateOne(@Valid Discipline entity) {
         Optional<Discipline> entityFromDB = repository.findById(entity.getId());
-        if(entityFromDB.isPresent()){
+        if (entityFromDB.isPresent()) {
             repository.save(entity);
         }
 

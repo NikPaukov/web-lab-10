@@ -1,14 +1,17 @@
 package com.example.lab10.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
 @Entity
-@Table(name="SCHEDULES")
+@Table(name = "SCHEDULES")
 @Getter
 @Setter
 @ToString
@@ -21,17 +24,17 @@ public class Schedule {
 
     @Pattern(regexp = "(^$)|[а-яА-ЯїієЄІЇa-zA-Z\\-\\d ']++", message = "name should contain only english/ukrainian letters")
     private String name;
-    @JoinColumn(name="teacher_id")
+    @JoinColumn(name = "teacher_id")
     @ManyToOne
     @NotNull(message = "teacher is required")
     private Teacher teacher;
 
-    @JoinColumn(name="discipline_id")
+    @JoinColumn(name = "discipline_id")
     @ManyToOne
     @NotNull(message = "discipline is required")
     private Discipline discipline;
 
-    @JoinColumn(name="group_id")
+    @JoinColumn(name = "group_id")
     @ManyToOne
     @NotNull(message = "group is required")
     private Group group;
@@ -42,7 +45,7 @@ public class Schedule {
     @Max(value = 6, message = "lesson should be from 1 to 6")
     private Integer lesson;
 
-    @Column(name="dayofweek")
+    @Column(name = "dayofweek")
     @NotNull(message = "dayOfWeek is required")
     @Min(value = 1, message = "dayOfWeek should be from 1 to 7")
     @Max(value = 7, message = "dayOfWeek should be from 1 to 7")
@@ -50,7 +53,6 @@ public class Schedule {
 
 
     private String classroom;
-
 
 
     @Override
