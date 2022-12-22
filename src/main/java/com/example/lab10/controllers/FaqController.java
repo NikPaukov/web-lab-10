@@ -20,7 +20,7 @@ public class FaqController {
     public Page<Faq> getAll(@RequestParam(required = false, defaultValue = "0") Integer page,
                             @RequestParam(required = false, defaultValue = "10") Integer elementsPerPage,
                             @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
-                            @RequestParam(required = false, defaultValue = "name") FaqService.FaqFields sortField) {
+                            @RequestParam(required = false, defaultValue = "question") FaqService.FaqFields sortField) {
         return service.getAll(page, elementsPerPage, sortDirection, sortField);
     }
 
